@@ -1,9 +1,10 @@
 buildscript {
+
     repositories {
         jcenter()
     }
     dependencies {
-        classpath libs.grgit
+        classpath "org.ajoberstar.grgit:grgit-gradle:$versions.grgit"
     }
 }
 

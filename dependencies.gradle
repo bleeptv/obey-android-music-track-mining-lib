@@ -1,12 +1,41 @@
 ext.versions = [
-        coroutines        : '1.3.1',
-        coroutines_android: '1.3.2',
-        grgit             : '3.1.1'
+        target_sdk            : 29,
+        min_sdk               : 22,
+        compiled_sdk          : 29,
+        jvm_target            : "1.8",
+        build_tools           : "30.0.2",
+        kotlin                : "1.4.20",
+        androidx_core_ktx     : "1.3.2",
+        test_core_ktx         : "1.3.0",
+        appcompat             : "1.2.0",
+        androidx_material     : "1.3.0",
+        junit_ext             : "1.1.2",
+        androidx_test_core    : "1.1.1",
+        robolectric           : "4.4",
+        espresso              : "3.3.0",
+        mockito_kotlin        : "2.2.0",
+        coroutines            : "1.3.1",
+        coroutines_android    : "1.3.2",
+        grgit                 : "3.1.1",
+        detekt                : "1.16.0"
 ]
 
 ext.libs = [
-        //coroutines
-        coroutines_core      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
-        coroutines_android   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines_android",
-        grgit                : "org.ajoberstar.grgit:grgit-gradle:$versions.grgit"
+        kotlin            : "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin",
+        androidx_core_ktx : "androidx.core:core-ktx:$versions.androidx_core_ktx",
+        appcompat         : "androidx.appcompat:appcompat:$versions.appcompat",
+        androidx_material : "com.google.android.material:material:$versions.androidx_material",
+        coroutines_core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
+        coroutines_android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines_android"
+]
+
+ext.test_libs = [
+        robolectric       : "org.robolectric:robolectric:$versions.robolectric",
+        test_core_ktx     : "androidx.test:core-ktx:$versions.test_core_ktx",
+        junit_ext         : "androidx.test.ext:junit:$versions.junit_ext",
+        junit_ext_ktx     : "androidx.test.ext:junit-ktx:$versions.junit_ext",
+        espresso          : "androidx.test.espresso:espresso-core:$versions.espresso",
+        espresso_contrib  : "androidx.test.espresso:espresso-contrib:$versions.espresso",
+        mockito_kotlin    : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin",
+        arch_test_core    : "android.arch.core:core-testing:$versions.androidx_test_core"
 ]
