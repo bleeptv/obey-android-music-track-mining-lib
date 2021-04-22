@@ -27,6 +27,16 @@ allprojects {
     }
 }
 
+subprojects {
+    apply plugin: "io.gitlab.arturbosch.detekt"
+
+    detekt {
+        toolVersion = versions.detekt
+        buildUponDefaultConfig = true
+        config = files("$rootDir/config/detekt/custom-detekt-config.yml")
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'io.gitlab.arturbosch.detekt'
 }
 
 apply from: "$project.rootDir/script-git-version.gradle"
@@ -30,12 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = versions.jvm_target
     }
-}
-
-detekt {
-    toolVersion = versions.detekt
-    config = files("config/detekt/detekt.yml")
-    buildUponDefaultConfig = true
 }
 
 dependencies {
