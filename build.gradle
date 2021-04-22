@@ -27,13 +27,9 @@ apply from: './dependencies.gradle'
 
 sonarqube {
     properties {
-        val sonarqubeSonarProjectKey: String by project
-        val sonarqubeSonarOrganization: String by project
-        val sonarqubeSonarHostUrl: String by project
-
-        property "sonar.projectKey", $sonarqubeSonarProjectKey
-        property "sonar.organization", $sonarqubeSonarOrganization
-        property "sonar.host.url", $sonarqubeSonarHostUrl
+        property "sonar.projectKey", sonarqubeSonarProjectKey
+        property "sonar.organization", sonarqubeSonarOrganization
+        property "sonar.host.url", sonarqubeSonarHostUrl
     }
 }
 
