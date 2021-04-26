@@ -1,0 +1,101 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.8.6"
+}
+
+def jacocoCoverageThresholdDefault = 0.75
+
+private static boolean isAndroidModule(Project project) {
+    return project.plugins.hasPlugin('com.android.library')
+}
+
+def setupAndroidReporting() {
+    tasks.withType(Test) {
+        // Whether or not classes without source location should be instrumented
+        jacoco.includeNoLocationClasses true
+        testLogging {
+            showExceptions = true
+            showStandardStreams = true
+            events(
+                    TestLogEvent.PASSED,
+                    TestLogEvent.SKIPPED,
+                    TestLogEvent.FAILED
+            )
+        }
+    }
+
+    task jacocoTestsReport(
+            type: JacocoReport,
+            dependsOn: ['testDebugUnitTest']
+    ) {
+        reports {
+            csv.enabled false
+            xml {
+                enabled true
+                xml.destination = file("${buildDir}/reports/jacoco/jacoco.xml")
+            }
+            html {
+                enabled true
+                destination file("${buildDir}/reports/jacoco/html")
+            }
+        }
+        // Change as needed
+        def fileFilter = ["**/*App.*", "**/*JsonAdapter.*", "**/di/**", "**/*Dagger.*"]
+        def debugTree = fileTree(
+                dir: "$buildDir/tmp/kotlin-classes/debug",
+                excludes: fileFilter
+        )
+        def mainSrc = "$projectDir/src/main/java"
+        sourceDirectories.from = files([mainSrc])
+        classDirectories.from = files([debugTree])
+        executionData.from = fileTree(
+                dir: project.buildDir,
+                includes: [
+                        'jacoco/testDebugUnitTest.exec',
+                        'outputs/code-coverage/connected/*coverage.ec'
+                ]
+        )
+    }
+}
+
+def setupAndroidCoverageVerification(threshold) {
+    task jacocoTestCoverageVerification(
+            type: JacocoCoverageVerification,
+            dependsOn: [ 'testDebugUnitTest' ]
+    ) {
+        violationRules {
+            rule {
+                limit {
+                    minimum = threshold
+                }
+            }
+        }
+        final def coverageSourceDirs = [
+                "$projectDir/src/main/java",
+                "$projectDir/src/main/kotlin"
+        ]
+        final def debugTree = fileTree(
+                dir: "$buildDir/tmp/kotlin-classes/debug"
+        )
+        sourceDirectories.from = files(coverageSourceDirs)
+        classDirectories.from = files([debugTree])
+        executionData.from = fileTree(
+                dir: project.buildDir,
+                includes: ['jacoco/testDebugUnitTest.exec']
+        )
+    }
+}
+
+afterEvaluate { project ->
+    def threshold = project.hasProperty('jacocoCoverageThreshold')
+            ? project.jacocoCoverageThreshold
+            : jacocoCoverageThresholdDefault
+
+    if (isAndroidModule(project)) {
+        setupAndroidReporting()
+        setupAndroidCoverageVerification(threshold)
+    }
+}
