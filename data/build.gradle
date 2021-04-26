@@ -45,8 +45,6 @@ dependencies {
     testImplementation test_libs.junit_ext_ktx
     testImplementation test_libs.junit_ext
 
-    androidTestImplementation test_libs.junit_5
-    androidTestImplementation test_libs.test_core_ktx
     androidTestImplementation test_libs.junit_ext
     androidTestImplementation test_libs.junit_ext_ktx
 }
