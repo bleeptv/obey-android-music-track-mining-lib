@@ -48,9 +48,9 @@ jobs:
         run: ./gradlew build sonarqube --info
       - name: Unit Tests Results
         uses: actions/upload-artifact@v2
-          with:
-            name: unit-tests-results
-            path: "*/build/reports/tests/*"
+        with:
+          name: unit-tests-results
+          path: "*/build/reports/tests/*"
       - name: Sonar Jacoco Analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
