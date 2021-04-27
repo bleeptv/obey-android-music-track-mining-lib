@@ -5,10 +5,10 @@ import java.util.Date
 /**
  * Describes the parties involved in the distribution of the music track
  *
- * @property publisher Name of the record label/publisher of a music track
- * @property releaseDate The date which the music track was released
+ * @property publisherName Name of the record label/publisher of a music track
+ * @property releaseDateUTC The date which the music track was released
  */
 data class PublishingAttribution(
-        val publisher: String,
-        val releaseDate: Date
+        val publisherName: String,
+        val releaseDateUTC: Date
 )
