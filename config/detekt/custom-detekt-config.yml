@@ -4,3 +4,6 @@ style:
     ignoreLocalVariableDeclaration: true
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
+
+build:
+  maxIssues: 10

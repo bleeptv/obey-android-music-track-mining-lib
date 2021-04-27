@@ -39,5 +39,6 @@ ext.test_libs = [
         espresso_contrib  : "androidx.test.espresso:espresso-contrib:$versions.espresso",
         mockito_kotlin    : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin",
         arch_test_core    : "android.arch.core:core-testing:$versions.androidx_test_core",
-        junit_5           : "org.junit.jupiter:junit-jupiter:$versions.junit_5"
+        junit_5           : "org.junit.jupiter:junit-jupiter:$versions.junit_5",
+        junit_5_eng       : "org.junit.jupiter:junit-jupiter-engine:$versions.junit_5"
 ]
