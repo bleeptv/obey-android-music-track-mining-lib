@@ -7,6 +7,9 @@ import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyAlbumImage
 import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyLibraryTrack
 import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyTrackItem
 
+/**
+ * Test fixture to build a serialized Spotify JSON track object representation
+ */
 object SpotifyTrackJSONResultTestFixture {
 
     const val responsePayloadFileLocation = "tracks/spotify/responses/spotify_liked_songs_response_payload.json"
@@ -23,6 +26,11 @@ object SpotifyTrackJSONResultTestFixture {
     private const val trackDuration = 219475L
     private const val trackISRCCode = "GBKPL1828466"
 
+    /**
+     * Build album information for a track object
+     *
+     * @return a [SpotifyAlbum] containing album art and details on the album's release and title
+     */
     private fun buildAlbumContents(): SpotifyAlbum {
         val albumCoverImage = SpotifyAlbumImage(
             width = DEFAULT_IMAGE_WIDTH,
@@ -36,6 +44,11 @@ object SpotifyTrackJSONResultTestFixture {
         )
     }
 
+    /**
+     * Build a Spotify Track Item to add to a response JSON payload object
+     *
+     * @return a Spotify Track Item consisting of a single track
+     */
     fun buildSpotifyTrackItem(): SpotifyTrackItem {
         val performingArtist = SpotifyArtist(name = artistName)
         val likedTrack = SpotifyLibraryTrack(

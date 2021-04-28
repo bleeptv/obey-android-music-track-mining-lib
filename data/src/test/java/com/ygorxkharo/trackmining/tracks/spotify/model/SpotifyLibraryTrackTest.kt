@@ -15,7 +15,7 @@ internal class SpotifyLibraryTrackTest {
             .Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
-    private val likedSongsPayloadAdapter: JsonAdapter<SpotifyLikedSongsResult> = moshiInstance.adapter(SpotifyLikedSongsResult::class.java)
+    private val likedSongsPayloadAdapter: JsonAdapter<SpotifyTracksResult> = moshiInstance.adapter(SpotifyTracksResult::class.java)
 
 
     @Test
@@ -25,7 +25,7 @@ internal class SpotifyLibraryTrackTest {
         val responsePayloadToJson = likedSongsPayloadAdapter.fromJson(likedSongsPayloadJson)
         val expectedJsonString = likedSongsPayloadAdapter.toJson(responsePayloadToJson)
 
-        val spotifyLikeSongsResultObject = SpotifyLikedSongsResult(
+        val spotifyLikeSongsResultObject = SpotifyTracksResult(
             trackItems = listOf(SpotifyTrackJSONResultTestFixture.buildSpotifyTrackItem())
         )
 
