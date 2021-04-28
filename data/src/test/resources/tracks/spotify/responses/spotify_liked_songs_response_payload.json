@@ -1,0 +1,86 @@
+{
+  "href": "https://api.spotify.com/v1/me/tracks?offset=0&limit=1",
+  "items": [
+    {
+      "added_at": "2021-04-14T08:59:19Z",
+      "track": {
+        "album": {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7yxpGyw5CZPsrTPpkERpc4"
+              },
+              "href": "https://api.spotify.com/v1/artists/7yxpGyw5CZPsrTPpkERpc4",
+              "id": "7yxpGyw5CZPsrTPpkERpc4",
+              "name": "Refs",
+              "type": "artist",
+              "uri": "spotify:artist:7yxpGyw5CZPsrTPpkERpc4"
+            }
+          ],
+          "available_markets": [
+            "NG",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/15LF2XANVOYyWG8Hv8TVNp"
+          },
+          "href": "https://api.spotify.com/v1/albums/15LF2XANVOYyWG8Hv8TVNp",
+          "id": "15LF2XANVOYyWG8Hv8TVNp",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b27309bd912a6dd8ab6faad57346",
+              "width": 640
+            }
+          ],
+          "name": "Stories",
+          "release_date": "2019-06-07",
+          "release_date_precision": "day",
+          "total_tracks": 14,
+          "type": "album",
+          "uri": "spotify:album:15LF2XANVOYyWG8Hv8TVNp"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/7yxpGyw5CZPsrTPpkERpc4"
+            },
+            "href": "https://api.spotify.com/v1/artists/7yxpGyw5CZPsrTPpkERpc4",
+            "id": "7yxpGyw5CZPsrTPpkERpc4",
+            "name": "Refs",
+            "type": "artist",
+            "uri": "spotify:artist:7yxpGyw5CZPsrTPpkERpc4"
+          }
+        ],
+        "available_markets": [
+          "NG",
+          "ZA"
+        ],
+        "disc_number": 1,
+        "duration_ms": 219475,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "GBKPL1828466"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/6E1ZonB1Fosz99Rg0tUBTi"
+        },
+        "href": "https://api.spotify.com/v1/tracks/6E1ZonB1Fosz99Rg0tUBTi",
+        "id": "6E1ZonB1Fosz99Rg0tUBTi",
+        "is_local": false,
+        "name": "Stories",
+        "popularity": 54,
+        "preview_url": "https://p.scdn.co/mp3-preview/93e11b09a18d8403c6224158d7ae7b2bb551c69e?cid=774b29d4f13844c495f206cafdad9c86",
+        "track_number": 11,
+        "type": "track",
+        "uri": "spotify:track:6E1ZonB1Fosz99Rg0tUBTi"
+      }
+    }
+  ],
+  "limit": 1,
+  "next": "https://api.spotify.com/v1/me/tracks?offset=1&limit=1",
+  "offset": 0,
+  "previous": null,
+  "total": 37
+}
