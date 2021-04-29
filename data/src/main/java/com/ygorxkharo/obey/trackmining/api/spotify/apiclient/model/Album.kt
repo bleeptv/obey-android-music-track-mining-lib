@@ -20,8 +20,8 @@ data class Album(
     val images: List<AlbumImage>,
 
     /**
-     * @property releaseDate The date in which the album was released. Formatted to "YYYY-mm-DD"
+     * @property releaseDateYYYYmmDD The date in which the album was released. Formatted to "YYYY-mm-DD"
      */
     @Json(name = "release_date")
-    val releaseDate: String
+    val releaseDateYYYYmmDD: String
 )

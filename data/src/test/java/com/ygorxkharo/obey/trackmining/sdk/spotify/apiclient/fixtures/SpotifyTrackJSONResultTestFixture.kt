@@ -40,7 +40,7 @@ object SpotifyTrackJSONResultTestFixture {
         return Album(
             title = albumTitle,
             images = listOf(albumCoverImage),
-            releaseDate = trackReleaseDate,
+            releaseDateYYYYmmDD = trackReleaseDate,
         )
     }
 
