@@ -1,11 +1,11 @@
-package com.ygorxkharo.trackmining.fixtures.spotify
+package com.ygorxkharo.obey.trackmining.sdk.spotify.apiclient.fixtures
 
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyAlbum
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyArtist
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyExternalIds
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyAlbumImage
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyLibraryTrack
-import com.ygorxkharo.trackmining.tracks.spotify.model.SpotifyTrackItem
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.Album
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.Artist
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.ExternalIds
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.AlbumImage
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.LibraryTrack
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.TrackItem
 
 /**
  * Test fixture to build a serialized Spotify JSON track object representation
@@ -29,17 +29,17 @@ object SpotifyTrackJSONResultTestFixture {
     /**
      * Build album information for a track object
      *
-     * @return a [SpotifyAlbum] containing album art and details on the album's release and title
+     * @return a [Album] containing album art and details on the album's release and title
      */
-    private fun buildAlbumContents(): SpotifyAlbum {
-        val albumCoverImage = SpotifyAlbumImage(
+    private fun buildAlbumContents(): Album {
+        val albumCoverImage = AlbumImage(
             width = DEFAULT_IMAGE_WIDTH,
             height = DEFAULT_IMAGE_HEIGHT,
             imageUrl = albumArtUrl
         )
-        return SpotifyAlbum(
-            albumTitle = albumTitle,
-            albumImages = listOf(albumCoverImage),
+        return Album(
+            title = albumTitle,
+            images = listOf(albumCoverImage),
             releaseDate = trackReleaseDate,
         )
     }
@@ -49,22 +49,22 @@ object SpotifyTrackJSONResultTestFixture {
      *
      * @return a Spotify Track Item consisting of a single track
      */
-    fun buildSpotifyTrackItem(): SpotifyTrackItem {
-        val performingArtist = SpotifyArtist(name = artistName)
-        val likedTrack = SpotifyLibraryTrack(
-            trackTitle = trackTitle,
+    fun buildSpotifyTrackItem(): TrackItem {
+        val performingArtist = Artist(name = artistName)
+        val likedTrack = LibraryTrack(
+            title = trackTitle,
             trackId = trackId,
             albumContents = buildAlbumContents(),
             durationInMillis = trackDuration,
-            externalIds = SpotifyExternalIds(
+            externalIds = ExternalIds(
                 isrcCode = trackISRCCode
             ),
             regionalAvailability = regionalAvailabilityList,
             streamingUri = testTrackStreamingUri,
             artists = listOf(performingArtist)
         )
-        return SpotifyTrackItem(
-            trackItem = likedTrack
+        return TrackItem(
+            track = likedTrack
         )
     }
 }
