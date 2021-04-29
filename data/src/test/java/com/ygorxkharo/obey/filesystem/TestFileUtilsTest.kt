@@ -1,4 +1,4 @@
-package com.ygorxkharo.filesystem
+package com.ygorxkharo.obey.filesystem
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

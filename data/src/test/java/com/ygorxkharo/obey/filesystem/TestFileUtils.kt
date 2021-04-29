@@ -1,4 +1,4 @@
-package com.ygorxkharo.filesystem
+package com.ygorxkharo.obey.filesystem
 
 import java.io.BufferedReader
 import java.io.InputStream
