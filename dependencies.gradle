@@ -38,6 +38,7 @@ ext.test_libs = [
         test_core_ktx     : "androidx.test:core-ktx:$versions.test_core_ktx",
         junit_ext         : "androidx.test.ext:junit:$versions.junit_ext",
         junit_ext_ktx     : "androidx.test.ext:junit-ktx:$versions.junit_ext",
+        coroutines_test   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines",
         espresso          : "androidx.test.espresso:espresso-core:$versions.espresso",
         espresso_contrib  : "androidx.test.espresso:espresso-contrib:$versions.espresso",
         mockito_kotlin    : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin",

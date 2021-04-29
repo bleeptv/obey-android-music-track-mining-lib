@@ -49,6 +49,7 @@ dependencies {
     testImplementation test_libs.mockito_kotlin
     testImplementation test_libs.junit_ext_ktx
     testImplementation test_libs.junit_ext
+    testImplementation test_libs.coroutines_test
 
     androidTestImplementation test_libs.junit_ext
     androidTestImplementation test_libs.junit_ext_ktx

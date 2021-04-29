@@ -1,4 +1,4 @@
-package com.ygorxkharo.obey.threading
+package com.ygorxkharo.obey.utilities.threading
 
 import kotlin.coroutines.CoroutineContext
 
