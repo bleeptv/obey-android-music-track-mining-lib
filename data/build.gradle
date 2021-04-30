@@ -41,12 +41,15 @@ dependencies {
     implementation libs.androidx_core_ktx
     implementation libs.moshi
     kapt libs.moshiCodeGen
+    implementation libs.coroutines_core
+    implementation libs.coroutines_android
 
     testImplementation test_libs.junit_5
     testRuntimeOnly test_libs.junit_5_eng
     testImplementation test_libs.mockito_kotlin
     testImplementation test_libs.junit_ext_ktx
     testImplementation test_libs.junit_ext
+    testImplementation test_libs.coroutines_test
 
     androidTestImplementation test_libs.junit_ext
     androidTestImplementation test_libs.junit_ext_ktx
