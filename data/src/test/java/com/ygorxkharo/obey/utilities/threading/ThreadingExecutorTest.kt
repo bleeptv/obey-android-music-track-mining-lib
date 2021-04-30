@@ -37,7 +37,7 @@ internal class ThreadingExecutorTest {
         val coroutineContextProvider = DefaultCoroutineContextProvider()
 
         //Act
-        ThreadingExecutor.executeAsyncOperation(
+        val backgroundJob = ThreadingExecutor.executeAsyncOperation(
             fakeBackgroundThreadTask,
             mockMainThreadTask,
             coroutineContextProvider
@@ -45,5 +45,6 @@ internal class ThreadingExecutorTest {
 
         //Assert
         verify(mockMainThreadTask).invoke(backgroundResultValue)
+        backgroundJob.cancel()
     }
 }
