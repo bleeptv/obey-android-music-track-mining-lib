@@ -11,5 +11,5 @@ data class TrackItem(
      * @property track Spotify-related metadata on a track
      */
     @Json(name = "track")
-    val track: LibraryTrack
+    val track: LibraryTrackEntity
 )
