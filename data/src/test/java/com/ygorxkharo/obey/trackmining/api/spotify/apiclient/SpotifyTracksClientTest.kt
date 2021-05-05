@@ -42,6 +42,7 @@ internal class SpotifyTracksClientTest {
     private val mockOnFetchLikedSongsCallback: (Result<List<LibraryTrack>>) -> Unit = mock()
     private val authToken = "Bearer ey.Tjlaowwwoijfaljf242sfsjaf"
     private val libraryTrackResultCount = 1
+    private val httpErrorCode = 500
     private val mockFetchLikedSongsCall: Call<GetTracksFromSpotifyResponse> = mock()
     private val moshiInstance = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -127,7 +128,7 @@ internal class SpotifyTracksClientTest {
                 """.toResponseBody()
 
             mockFetchLikedSongsCall.stub {
-                on { execute() }.thenReturn(Response.error(500, errorBody))
+                on { execute() }.thenReturn(Response.error(httpErrorCode, errorBody))
             }
 
             //Act
@@ -156,7 +157,7 @@ internal class SpotifyTracksClientTest {
             //Arrange: Simulate failing request
             val errorResponseString = "".toResponseBody()
             mockFetchLikedSongsCall.stub {
-                on { execute() }.thenReturn(Response.error(500, errorResponseString))
+                on { execute() }.thenReturn(Response.error(httpErrorCode, errorResponseString))
             }
 
             sut.getLibraryTracks(authToken, libraryTrackResultCount, mockOnFetchLikedSongsCallback)
