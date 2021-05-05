@@ -10,7 +10,7 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 internal class LibraryTrackMapperTest {
 
-    private val regionalAvailabilityList = listOf("NG","ZA")
+    private val regionalAvailabilityCollection = listOf("NG","ZA")
     private val trackId = "6E1ZonB1Fosz99Rg0tUBTi"
     private val testTrackStreamingUri = "spotify:track:$trackId"
     private val albumTitle = "Stories"
@@ -36,8 +36,7 @@ internal class LibraryTrackMapperTest {
     }
 
     @Test
-    fun `test when mapping a track entity to a library track, expect a library track's content to be created`() {
-
+    fun `test when mapping a track entity to a library track, expect a library track's content to be created`(){
         //Assert
         assertEquals(albumTitle, actualLibraryTrack.trackContent.albumSource.albumTitle)
         assertEquals(albumArtUrl, actualLibraryTrack.trackContent.albumSource.coverImageUri)
@@ -46,8 +45,7 @@ internal class LibraryTrackMapperTest {
     }
 
     @Test
-    fun `test when mapping a track entity to a library track, expect a library track to be contain SKU information`() {
-
+    fun `test when mapping a track entity to a library track, expect a library track to be contain SKU information`(){
         //Assert
         assertEquals(trackISRCCode, actualLibraryTrack.skus.isrcCode)
         assertEquals("spotify", actualLibraryTrack.skus.sourcingPlatform.sourceReferenceSystem)
@@ -55,17 +53,15 @@ internal class LibraryTrackMapperTest {
     }
 
     @Test
-    fun `test when mapping a track entity to a library track, expect a library track to be contain playback attribution`() {
-
+    fun `test when mapping a track entity to a library track, expect a library track to be contain playback attribution`(){
         //Assert
         assertEquals(testTrackStreamingUri, actualLibraryTrack.playbackAttribution.streamingUri)
-        assertEquals(regionalAvailabilityList, actualLibraryTrack.playbackAttribution.licensingRestrictions.regionalAvailability)
+        assertEquals(regionalAvailabilityCollection, actualLibraryTrack.playbackAttribution.licensingRestrictions.regionalAvailability)
         assertEquals("spotify", actualLibraryTrack.playbackAttribution.platform)
     }
 
     @Test
     fun `test when mapping a track entity to a library track, expect a library track to be contain production attribution`() {
-
         //Assert
         assertEquals(artistName, actualLibraryTrack.productionAttribution.leadArtist)
         assertTrue(actualLibraryTrack.productionAttribution.featuredArtists == featureArtists)
@@ -73,7 +69,6 @@ internal class LibraryTrackMapperTest {
 
     @Test
     fun `test when mapping a track entity to a library track, expect a library track to be contain publishing attribution`() {
-
         //Assert
         assertEquals(trackReleaseDate, actualLibraryTrack.publishingAttribution.releaseDateUTC.toString())
     }

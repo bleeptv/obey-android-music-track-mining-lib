@@ -38,11 +38,11 @@ class LibraryTrackMapper {
      * @return a domain model representing a library track
      */
     fun convertToLibraryTrack(trackEntity: LibraryTrackEntity): LibraryTrack {
-        val trackContent = extractTrackContents(trackEntity)
-        val playbackAttribution = extractPlaybackAttribution(trackEntity)
-        val productionAttribution = extractProductionAttribution(trackEntity)
-        val publishingAttribution = extractPublishingAttribution(trackEntity)
-        val skus = extractSKUs(trackEntity)
+        val trackContent = convertToTrackContents(trackEntity)
+        val playbackAttribution = convertToPlaybackAttribution(trackEntity)
+        val productionAttribution = convertToProductionAttribution(trackEntity)
+        val publishingAttribution = convertToPublishingAttribution(trackEntity)
+        val skus = convertToSKUs(trackEntity)
 
         return LibraryTrack(
             trackContent = trackContent,
@@ -59,7 +59,7 @@ class LibraryTrackMapper {
      * @param trackEntity Contains the SKU data
      * @return an stock keeping units object containing platform and track recording information
      */
-    private fun extractSKUs(trackEntity: LibraryTrackEntity): SKUs {
+    private fun convertToSKUs(trackEntity: LibraryTrackEntity): SKUs {
         return SKUs(
             isrcCode = trackEntity.externalIds.isrcCode,
             sourcingPlatform = SourcingPlatform(
@@ -75,7 +75,7 @@ class LibraryTrackMapper {
      * @param trackEntity Contains publishing attribution details to extract
      * @return an object containing a release date and publisher/record label information
      */
-    private fun extractPublishingAttribution(trackEntity: LibraryTrackEntity): PublishingAttribution {
+    private fun convertToPublishingAttribution(trackEntity: LibraryTrackEntity): PublishingAttribution {
         val albumReleaseDate = trackEntity.albumContents.releaseDateYYYYmmDD
         return PublishingAttribution(
             publisherName = "", // Currently missing from response payload. Will be handled in Jira story B2MVE-1150
@@ -93,7 +93,7 @@ class LibraryTrackMapper {
      * first artist on the list is the lead artist
      * @return an object containing the lead artist, as well as a collection of featured artists
      */
-    private fun extractProductionAttribution(trackEntity: LibraryTrackEntity): ProductionAttribution {
+    private fun convertToProductionAttribution(trackEntity: LibraryTrackEntity): ProductionAttribution {
         val leadArtist = trackEntity.artists.first()
         return ProductionAttribution(
             leadArtist = leadArtist.name,
@@ -109,7 +109,7 @@ class LibraryTrackMapper {
      * @param trackEntity contains track streaming details
      * @return an object containing streaming platform name, streaming URL, and regional availability
      */
-    private fun extractPlaybackAttribution(trackEntity: LibraryTrackEntity): PlaybackAttribution {
+    private fun convertToPlaybackAttribution(trackEntity: LibraryTrackEntity): PlaybackAttribution {
         return PlaybackAttribution(
             platform = platformName,
             streamingUri = trackEntity.streamingUri,
@@ -125,7 +125,7 @@ class LibraryTrackMapper {
      * @param trackEntity contains track  to extract
      * @return an object containing the track title, originating album, duration, and genres
      */
-    private fun extractTrackContents(
+    private fun convertToTrackContents(
         trackEntity: LibraryTrackEntity,
     ): TrackContent {
         return TrackContent(
