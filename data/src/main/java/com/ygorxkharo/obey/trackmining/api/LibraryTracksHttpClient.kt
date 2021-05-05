@@ -34,11 +34,9 @@ interface LibraryTracksHttpClient {
      * Cancel all network calls made to the HTTP resource
      */
     fun cancelAllRequests() {
-        networkCallsCollection.forEach { networkJob ->
-            if(networkJob.isActive) {
-                networkJob.cancel()
-            }
-        }
+        networkCallsCollection
+            .filter { job -> job.isActive}
+            .forEach { job -> job.cancel()}
         networkCallsCollection.clear()
     }
 }
