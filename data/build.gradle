@@ -27,6 +27,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -43,9 +44,10 @@ dependencies {
     kapt libs.moshiCodeGen
     implementation libs.coroutines_core
     implementation libs.coroutines_android
-    implementation libs.retrofit
-    implementation libs.moshi_converter
+    api libs.retrofit
+    api libs.moshi_converter
     implementation libs.okHTTP
+    coreLibraryDesugaring libs.core_desugar_lib
 
     testImplementation test_libs.junit_5
     testRuntimeOnly test_libs.junit_5_eng
