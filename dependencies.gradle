@@ -20,8 +20,9 @@ ext.versions = [
         detekt                : "1.16.0",
         junit_5               : "5.7.1",
         moshi                 : '1.11.0',
-        retrofit              : '2.8.0',
-        okHTTP                : '4.3.1'
+        retrofit              : '2.9.0',
+        okHTTP                : '4.3.1',
+        core_desugar_lib      : '1.0.5'
 ]
 
 ext.libs = [
@@ -33,9 +34,12 @@ ext.libs = [
         coroutines_android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines_android",
         moshi             : "com.squareup.moshi:moshi-kotlin:$versions.moshi",
         moshiCodeGen      : "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi",
+        moshi_kotlin      : "com.squareup.moshi:moshi-kotlin:$versions.moshi",
         retrofit          : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         moshi_converter   : "com.squareup.retrofit2:converter-moshi:$versions.retrofit",
-        okHTTP            : "com.squareup.okhttp3:okhttp:$versions.okHTTP"
+        okHTTP            : "com.squareup.okhttp3:okhttp:$versions.okHTTP",
+        kodein            : "org.kodein.di:kodein-di:$versions.kodein",
+        core_desugar_lib  : "com.android.tools:desugar_jdk_libs:$versions.core_desugar_lib"
 ]
 
 ext.test_libs = [

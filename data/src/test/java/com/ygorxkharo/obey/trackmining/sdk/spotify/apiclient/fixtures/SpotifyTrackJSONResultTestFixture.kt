@@ -4,7 +4,7 @@ import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.Album
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.Artist
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.ExternalIds
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.AlbumImage
-import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.LibraryTrack
+import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.LibraryTrackEntity
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.TrackItem
 
 /**
@@ -20,6 +20,7 @@ object SpotifyTrackJSONResultTestFixture {
     private const val trackTitle = albumTitle
     private const val albumArtUrl = "https://i.scdn.co/image/ab67616d0000b27309bd912a6dd8ab6faad57346"
     private const val artistName = "Refs"
+    private const val featuredArtistName = "DJ Mix"
     private const val trackReleaseDate = "2019-06-07"
     private const val DEFAULT_IMAGE_WIDTH = 640
     private const val DEFAULT_IMAGE_HEIGHT = 640
@@ -51,7 +52,8 @@ object SpotifyTrackJSONResultTestFixture {
      */
     fun buildSpotifyTrackItem(): TrackItem {
         val performingArtist = Artist(name = artistName)
-        val likedTrack = LibraryTrack(
+        val featureArtist = Artist(name = featuredArtistName)
+        val likedTrack = LibraryTrackEntity(
             title = trackTitle,
             trackId = trackId,
             albumContents = buildAlbumContents(),
@@ -61,7 +63,7 @@ object SpotifyTrackJSONResultTestFixture {
             ),
             regionalAvailability = regionalAvailabilityList,
             streamingUri = testTrackStreamingUri,
-            artists = listOf(performingArtist)
+            artists = listOf(performingArtist, featureArtist)
         )
         return TrackItem(
             track = likedTrack

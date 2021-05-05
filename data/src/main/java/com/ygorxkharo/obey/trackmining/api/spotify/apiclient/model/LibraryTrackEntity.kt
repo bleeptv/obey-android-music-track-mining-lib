@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 /**
  * Represents a JSON object for a Spotify track resource
  */
-data class LibraryTrack(
+data class LibraryTrackEntity(
 
     /**
      * @property title The name of the track

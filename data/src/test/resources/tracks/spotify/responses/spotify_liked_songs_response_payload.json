@@ -51,6 +51,16 @@
             "name": "Refs",
             "type": "artist",
             "uri": "spotify:artist:7yxpGyw5CZPsrTPpkERpc4"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/7iks3yw5CZPsrTPpkERpc4"
+            },
+            "href": "https://api.spotify.com/v1/artists/7iks3yw5CZPsrTPpkERpc4",
+            "id": "7iks3yw5CZPsrTPpkERpc4",
+            "name": "DJ Mix",
+            "type": "artist",
+            "uri": "spotify:artist:7iks3yw5CZPsrTPpkERpc4"
           }
         ],
         "available_markets": [

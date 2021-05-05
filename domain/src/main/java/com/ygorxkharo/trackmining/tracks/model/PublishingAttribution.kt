@@ -1,5 +1,7 @@
 package com.ygorxkharo.trackmining.tracks.model
 
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Date
 
 /**
@@ -10,5 +12,5 @@ import java.util.Date
  */
 data class PublishingAttribution(
         val publisherName: String,
-        val releaseDateUTC: Date
+        val releaseDateUTC: LocalDateTime
 )
