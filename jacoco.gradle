@@ -43,7 +43,7 @@ def setupAndroidReporting() {
             }
         }
         // Change as needed
-        def fileFilter = ["**/*App.*", "**/*JsonAdapter.*", "**/di/**", "**/*Dagger.*"]
+        def fileFilter = ["**/*App.*", "**/di/**", "**/*Constants.*"]
         def debugTree = fileTree(
                 dir: "$buildDir/tmp/kotlin-classes/debug",
                 excludes: fileFilter

@@ -19,7 +19,7 @@ interface HTTPApi {
      */
     @GET("v1/me/tracks")
     fun getLikedSongs(
-        @Header(ClientConstants.AUTHORIZATION_HEADER_KEY) authorizationToken: String,
-        @Query(ClientConstants.RESULT_LIMIT) resultLimit: Int
+        @Header(Constants.AUTHORIZATION_HEADER_KEY) authorizationToken: String,
+        @Query(Constants.RESULT_LIMIT) resultLimit: Int
     ): Call<GetTracksFromSpotifyResponse>
 }
