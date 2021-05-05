@@ -36,7 +36,7 @@ internal class LibraryTrackMapperTest {
     }
 
     @Test
-    fun `test when mapping a track entity to a library track, expect a library track to be created`() {
+    fun `test when mapping a track entity to a library track, expect a library track's content to be created`() {
 
         //Assert
         assertEquals(albumTitle, actualLibraryTrack.trackContent.albumSource.albumTitle)
