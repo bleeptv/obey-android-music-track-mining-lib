@@ -4,6 +4,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.Test
 internal class ThreadingExecutorTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
+    private lateinit var backgroundJob: Job
 
     @BeforeEach
     fun setup() {
@@ -37,11 +40,14 @@ internal class ThreadingExecutorTest {
         val coroutineContextProvider = DefaultCoroutineContextProvider()
 
         //Act
-        val backgroundJob = ThreadingExecutor.executeAsyncOperation(
-            fakeBackgroundThreadTask,
-            mockMainThreadTask,
-            coroutineContextProvider
-        )
+        runBlocking {
+            backgroundJob = ThreadingExecutor.executeAsyncOperation(
+                fakeBackgroundThreadTask,
+                mockMainThreadTask,
+                coroutineContextProvider
+            )
+            backgroundJob.join()
+        }
 
         //Assert
         verify(mockMainThreadTask).invoke(backgroundResultValue)
