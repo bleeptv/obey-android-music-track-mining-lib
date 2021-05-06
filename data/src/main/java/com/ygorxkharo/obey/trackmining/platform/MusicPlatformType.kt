@@ -5,12 +5,12 @@ package com.ygorxkharo.obey.trackmining.platform
  *
  * @property platformName The name of the streaming platform
  */
-enum class StreamingPlatformType(val platformName: String) {
+enum class MusicPlatformType(val platformName: String) {
     SPOTIFY("spotify"),
     APPLE_MUSIC("apple_music");
 
     companion object {
-        private val map = values().associateBy(StreamingPlatformType::platformName)
+        private val map = values().associateBy(MusicPlatformType::platformName)
 
         /**
          * Performs a reverse lookup of a streaming platform based on it's name
