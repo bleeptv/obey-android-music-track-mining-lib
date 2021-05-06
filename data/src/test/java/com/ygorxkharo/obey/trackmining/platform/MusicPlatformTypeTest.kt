@@ -3,7 +3,7 @@ package com.ygorxkharo.obey.trackmining.platform
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class StreamingPlatformTypeTest {
+internal class MusicPlatformTypeTest {
 
     @Test
     fun `test when platform name is spotify, expect the streaming platform type to be SPOTIFY`() {
