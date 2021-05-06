@@ -3,9 +3,9 @@ package com.ygorxkharo.trackmining.platform
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 /**
- * Represents a streaming platform which contains tracks that can be mined
+ * Represents a music platform which contains library tracks that can be mined
  */
-interface MusicTracksSource {
+interface MusicLibraryTracksMiner {
 
     /**
      * Mine music tracks from the streaming platform
