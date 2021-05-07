@@ -1,20 +1,19 @@
-package com.ygorxkharo.obey.trackmining
+package com.ygorxkharo.trackmining
 
-import com.ygorxkharo.obey.trackmining.platform.MusicTracksSource
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 /**
  * Represents the object in charge of fetching library tracks from various music platforms.
- *
+ * The key defining which platform to use for mining is defined by the generic type [T]
  */
-interface LibraryTracksProvider {
+interface LibraryTracksProvider<T> {
 
     /**
      * @property platformCollection Contains a collection of music platforms to mine music tracks
-     * from, using a key defining the music platform of type [MusicTracksSource]
+     * from, using a key defining the music platform of generic type [T]
      */
-    val platformCollection: Map<MusicTracksSource, MusicLibraryTracksMiner>
+    val platformCollection: Map<T, MusicLibraryTracksMiner>
 
     /**
      *

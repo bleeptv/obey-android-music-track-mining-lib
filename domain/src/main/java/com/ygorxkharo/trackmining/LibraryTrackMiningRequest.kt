@@ -1,4 +1,4 @@
-package com.ygorxkharo.obey.trackmining
+package com.ygorxkharo.trackmining
 
 /**
  * Used to make a request to mine for library tracks

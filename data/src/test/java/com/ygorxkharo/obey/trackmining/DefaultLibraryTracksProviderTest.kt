@@ -5,8 +5,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
-import com.ygorxkharo.obey.trackmining.exceptions.LibraryTracksMiningException
+import com.ygorxkharo.trackmining.exceptions.LibraryTracksMiningException
 import com.ygorxkharo.obey.trackmining.platform.MusicTracksSource
+import com.ygorxkharo.trackmining.LibraryTrackMiningRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

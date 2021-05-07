@@ -1,4 +1,4 @@
-package com.ygorxkharo.obey.trackmining.exceptions
+package com.ygorxkharo.trackmining.exceptions
 
 /**
  * Represent an error occurring when trying to use a non-existent music
