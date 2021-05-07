@@ -37,7 +37,7 @@ internal class DefaultLibraryTracksProviderTest {
         whenever(mockLibraryTracksMinerCollection[any()]).thenReturn(mockLibraryTracksMiner)
 
         //Act
-        sut.mineFromPlatform(validLibraryTrackMinerRequest, mockOnMiningSuccessCallback, mockOnMiningErrorCallback)
+        sut.provideFromPlatform(validLibraryTrackMinerRequest, mockOnMiningSuccessCallback, mockOnMiningErrorCallback)
 
         //Assert
         verify(mockLibraryTracksMiner).mine(mockOnMiningSuccessCallback, mockOnMiningErrorCallback)
@@ -53,7 +53,7 @@ internal class DefaultLibraryTracksProviderTest {
 
         //Act
         val expectedException = assertThrows<LibraryTracksMiningException> {
-            sut.mineFromPlatform(
+            sut.provideFromPlatform(
                 invalidLibraryTrackMinerRequest,
                 mockOnMiningSuccessCallback,
                 mockOnMiningErrorCallback
@@ -73,7 +73,7 @@ internal class DefaultLibraryTracksProviderTest {
 
         //Act
         val expectedException = assertThrows<LibraryTracksMiningException> {
-            sut.mineFromPlatform(
+            sut.provideFromPlatform(
                 invalidLibraryTrackMinerRequest,
                 mockOnMiningSuccessCallback,
                 mockOnMiningErrorCallback

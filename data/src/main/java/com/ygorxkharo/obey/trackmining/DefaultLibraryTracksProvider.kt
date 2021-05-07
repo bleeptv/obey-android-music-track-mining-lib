@@ -16,7 +16,7 @@ class DefaultLibraryTracksProvider(
     override val platformCollection: Map<MusicTracksSource, MusicLibraryTracksMiner>
 ): LibraryTracksProvider<MusicTracksSource> {
 
-    override fun mineFromPlatform(
+    override fun provideFromPlatform(
         trackMiningRequest: LibraryTrackMiningRequest,
         onSuccess: (List<LibraryTrack>) -> Unit,
         onError: (Throwable) -> Unit

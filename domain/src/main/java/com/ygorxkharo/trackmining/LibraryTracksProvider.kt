@@ -21,7 +21,7 @@ interface LibraryTracksProvider<T> {
      * @param onSuccess Callback triggered when the mining process is successful
      * @param onError Callback triggered when the mining process fails due to an error
      */
-    fun mineFromPlatform(
+    fun provideFromPlatform(
         trackMiningRequest: LibraryTrackMiningRequest,
         onSuccess: (List<LibraryTrack>) -> Unit,
         onError: (Throwable) -> Unit
