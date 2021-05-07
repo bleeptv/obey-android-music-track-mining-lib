@@ -19,8 +19,9 @@ class DefaultLibraryTracksProvider(
         onError: (Throwable) -> Unit
     ) {
         val platformType = MusicTracksSource.getType(trackMiningRequest.chosenPlatformName) ?:
-            throw LibraryTracksMiningException("Music platform miner for this key doesn't exist")
-        val currentPlatform = platformCollection[platformType]
-        currentPlatform?.mine(onSuccess, onError)
+            throw LibraryTracksMiningException("Music track source type doesn't exist for this platform name")
+        val currentPlatform = platformCollection[platformType] ?:
+            throw LibraryTracksMiningException("Library track miner for this key doesn't exist")
+        currentPlatform.mine(onSuccess, onError)
     }
 }

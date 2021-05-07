@@ -44,11 +44,31 @@ internal class DefaultLibraryTracksProviderTest {
     }
 
     @Test
-    fun `test when library tracks miner does not exist, expect onMiningError to be triggered with throwable`() {
+    fun `test when music track source type does not exist, expect an exception for a missing music track source to be thrown`() {
         //Arrange
         chosenPlatformName = "test_library_track_miner_key"
         val invalidLibraryTrackMinerRequest = LibraryTrackMiningRequest(chosenPlatformName = chosenPlatformName)
-        val expectedErrorMessage = "Music platform miner for this key doesn't exist"
+        val expectedErrorMessage = "Music track source type doesn't exist for this platform name"
+
+        //Act
+        val expectedException = assertThrows<LibraryTracksMiningException> {
+            sut.mineFromPlatform(
+                invalidLibraryTrackMinerRequest,
+                mockOnMiningSuccessCallback,
+                mockOnMiningErrorCallback
+            )
+        }
+
+        //Assert
+        assertEquals(expectedErrorMessage, expectedException.message)
+    }
+
+    @Test
+    fun `test when library tracks miner does not exist, expect an exception for a missing library track miner to be thrown`() {
+        //Arrange
+        chosenPlatformName = "spotify"
+        val invalidLibraryTrackMinerRequest = LibraryTrackMiningRequest(chosenPlatformName = chosenPlatformName)
+        val expectedErrorMessage = "Library track miner for this key doesn't exist"
 
         //Act
         val expectedException = assertThrows<LibraryTracksMiningException> {
