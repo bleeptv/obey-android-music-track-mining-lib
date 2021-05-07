@@ -19,26 +19,26 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 internal class SpotifyTracksMinerTest {
 
     private lateinit var sut: SpotifyTracksMiner
-    private val mockTracksClient: LibraryTracksHttpClient = mock()
-    private val resultLimit = 1
+    private val mockLibraryTracksApiClient: LibraryTracksHttpClient = mock()
+    private val queryResultsLimit = 1
     private val mockOnSuccessCallback: (List<LibraryTrack>) -> Unit = mock()
     private val mockOnErrorCallback: (Throwable) -> Unit = mock()
     private val libraryTrack = SpotifyTrackJSONResultTestFixture.buildLibraryTrack()
-    private val fetchedLibraryTracks = listOf(libraryTrack)
+    private val expectedFetchedLibraryTracks = listOf(libraryTrack)
 
     @BeforeEach
     fun setup() {
         SpotifyTrackJSONResultTestFixture
-        sut = SpotifyTracksMiner(mockTracksClient, resultLimit)
+        sut = SpotifyTracksMiner(mockLibraryTracksApiClient, queryResultsLimit)
     }
 
     @Test
     fun `test when tracks are mined successfully, expect onSuccess callback to be triggered with list of tracks`() {
         //Arrange
-        mockTracksClient.stub {
+        mockLibraryTracksApiClient.stub {
             on { getLibraryTracks(any(), any(), any()) }.thenAnswer { invocation ->
                 val onComplete = invocation.arguments[2] as (Result<List<LibraryTrack>>) -> Unit
-                val result = Success(fetchedLibraryTracks)
+                val result = Success(expectedFetchedLibraryTracks)
                 onComplete(result)
             }
         }
@@ -47,7 +47,7 @@ internal class SpotifyTracksMinerTest {
         sut.mine(mockOnSuccessCallback, mockOnErrorCallback)
 
         //Assert
-        verify(mockOnSuccessCallback).invoke(fetchedLibraryTracks)
+        verify(mockOnSuccessCallback).invoke(expectedFetchedLibraryTracks)
         verifyNoMoreInteractions(mockOnErrorCallback)
     }
 
@@ -55,7 +55,7 @@ internal class SpotifyTracksMinerTest {
     fun `test when an error occurs when mining tracks, expect onError callback to be triggered with a throwable`() {
         //Arrange
         val errorThrowable = ServerError
-        mockTracksClient.stub {
+        mockLibraryTracksApiClient.stub {
             on { getLibraryTracks(any(), any(), any()) }.thenAnswer { invocation ->
                 val onComplete = invocation.arguments[2] as (Result<List<LibraryTrack>>) -> Unit
                 val result = Failure(errorThrowable)
