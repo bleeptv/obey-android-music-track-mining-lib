@@ -6,6 +6,16 @@ import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.ExternalIds
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.AlbumImage
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.LibraryTrackEntity
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.TrackItem
+import com.ygorxkharo.trackmining.tracks.model.AlbumSource
+import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
+import com.ygorxkharo.trackmining.tracks.model.LicensingRestrictions
+import com.ygorxkharo.trackmining.tracks.model.PlaybackAttribution
+import com.ygorxkharo.trackmining.tracks.model.ProductionAttribution
+import com.ygorxkharo.trackmining.tracks.model.PublishingAttribution
+import com.ygorxkharo.trackmining.tracks.model.SKUs
+import com.ygorxkharo.trackmining.tracks.model.SourcingPlatform
+import com.ygorxkharo.trackmining.tracks.model.TrackContent
+import java.time.LocalDateTime
 
 /**
  * Test fixture to build a serialized Spotify JSON track object representation
@@ -67,6 +77,62 @@ object SpotifyTrackJSONResultTestFixture {
         )
         return TrackItem(
             track = likedTrack
+        )
+    }
+
+    /**
+     * Build a test fixture of a library track
+     *
+     * @return a library track that can be used in unit/instrumentation tests
+     */
+    fun buildLibraryTrack(): LibraryTrack {
+
+        val albumTitle = "Test Song"
+        val musicPlatform = "spotify"
+        val albumSource = AlbumSource(
+            albumTitle = albumTitle,
+            coverImageUri = albumTitle
+        )
+
+        val trackContent = TrackContent(
+            songTitle = "test",
+            albumSource = albumSource,
+            durationInMillis = 0L,
+            genres = listOf()
+        )
+
+        val playbackAttribution = PlaybackAttribution(
+            platform = musicPlatform,
+            streamingUri = "",
+            licensingRestrictions = LicensingRestrictions(
+                regionalAvailability = listOf("US", "UK")
+            )
+        )
+
+        val productionAttribution = ProductionAttribution(
+            leadArtist = "Test",
+            featuredArtists = listOf("Test 1", "Test 2")
+        )
+
+        val publishingAttribution = PublishingAttribution(
+            publisherName = "Test Records",
+            releaseDateUTC = LocalDateTime.now()
+        )
+
+        val skus = SKUs(
+            isrcCode = "test_code",
+            sourcingPlatform = SourcingPlatform(
+                sourceReferenceId = "test_id",
+                sourceReferenceSystem = musicPlatform
+            )
+        )
+
+        return LibraryTrack(
+            trackContent = trackContent,
+            playbackAttribution = playbackAttribution,
+            productionAttribution = productionAttribution,
+            publishingAttribution = publishingAttribution,
+            skus = skus
         )
     }
 }
