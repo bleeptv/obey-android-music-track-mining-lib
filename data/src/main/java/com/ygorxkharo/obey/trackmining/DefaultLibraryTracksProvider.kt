@@ -1,5 +1,7 @@
 package com.ygorxkharo.obey.trackmining
 
+import com.ygorxkharo.obey.trackmining.exceptions.LibraryTracksMiningException
+import com.ygorxkharo.obey.trackmining.platform.MusicTracksSource
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
@@ -8,16 +10,17 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
  *
  */
 class DefaultLibraryTracksProvider(
-    override val platformCollection: Map<String, MusicLibraryTracksMiner>
-): LibraryTracksProvider<String>  {
+    override val platformCollection: Map<MusicTracksSource, MusicLibraryTracksMiner>
+): LibraryTracksProvider  {
 
     override fun mineFromPlatform(
-        chosenMusicPlatformSource: String,
-        onMineSuccess: (List<LibraryTrack>) -> Unit,
-        onMineError: (Throwable) -> Unit
+        trackMiningRequest: LibraryTrackMiningRequest,
+        onSuccess: (List<LibraryTrack>) -> Unit,
+        onError: (Throwable) -> Unit
     ) {
-        val currentPlatform = platformCollection[chosenMusicPlatformSource]
-        currentPlatform?.mine(onMineSuccess, onMineError) ?:
-        onMineError(Throwable("Music platform miner for this key doesn't exist"))
+        val platformType = MusicTracksSource.getType(trackMiningRequest.chosenPlatformName) ?:
+            throw LibraryTracksMiningException("Music platform miner for this key doesn't exist")
+        val currentPlatform = platformCollection[platformType]
+        currentPlatform?.mine(onSuccess, onError)
     }
 }

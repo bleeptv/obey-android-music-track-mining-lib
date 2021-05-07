@@ -1,31 +1,30 @@
 package com.ygorxkharo.obey.trackmining
 
+import com.ygorxkharo.obey.trackmining.platform.MusicTracksSource
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 /**
- * Represents the object in charge of fetching library tracks from various music platforms. The
- * generic type [T] represents the way a music tracks mining platform is represented
- * (i.e as a [String], the Spotify platform would be represented as "spotify")
+ * Represents the object in charge of fetching library tracks from various music platforms.
  *
  */
-interface LibraryTracksProvider<T> {
+interface LibraryTracksProvider {
 
     /**
      * @property platformCollection Contains a collection of music platforms to mine music tracks
-     * from, using a key defining the music platform of generic type [T]
+     * from, using a key defining the music platform of type [MusicTracksSource]
      */
-    val platformCollection: Map<T, MusicLibraryTracksMiner>
+    val platformCollection: Map<MusicTracksSource, MusicLibraryTracksMiner>
 
     /**
      *
-     * @param chosenMusicPlatformSource Defines the music platform to mine tracks from, of generic type [T]
-     * @param onMineSuccess Callback triggered when the mining process is successful
-     * @param onMineError Callback triggered when the mining process fails due to an error
+     * @param trackMiningRequest Defines the music platform to mine tracks from, of generic type [T]
+     * @param onSuccess Callback triggered when the mining process is successful
+     * @param onError Callback triggered when the mining process fails due to an error
      */
     fun mineFromPlatform(
-        chosenMusicPlatformSource: T,
-        onMineSuccess: (List<LibraryTrack>) -> Unit,
-        onMineError: (Throwable) -> Unit
+        trackMiningRequest: LibraryTrackMiningRequest,
+        onSuccess: (List<LibraryTrack>) -> Unit,
+        onError: (Throwable) -> Unit
     )
 }
