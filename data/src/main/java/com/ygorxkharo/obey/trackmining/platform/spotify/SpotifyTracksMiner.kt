@@ -9,12 +9,12 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 /**
  * Default implementation of a music track miner for Spotify
  *
- * @property tracksClient Client used to fetch music tracks from the Spotify streaming platform
- * @property trackResultLimit Maximum number of tracks to return when mining
+ * @property libraryTracksApiClient Client used to fetch music tracks from the Spotify streaming platform
+ * @property queryResultsLimit Maximum number of tracks to return when mining
  */
 class SpotifyTracksMiner(
-    private val tracksClient: LibraryTracksHttpClient,
-    private val trackResultLimit: Int
+    private val libraryTracksApiClient: LibraryTracksHttpClient,
+    private val queryResultsLimit: Int
 ): MusicLibraryTracksMiner {
 
     override fun mine(
@@ -22,7 +22,7 @@ class SpotifyTracksMiner(
         onError: (Throwable) -> Unit
     ) {
         val authToken = "" // TODO: Handle authentication token provision in Jira ticket #B2MVE-1140
-        tracksClient.getLibraryTracks(authToken, trackResultLimit) { result ->
+        libraryTracksApiClient.getLibraryTracks(authToken, queryResultsLimit) { result ->
             when(result) {
                 is Success -> onSuccess(result.payload)
                 is Failure -> onError(result.error)

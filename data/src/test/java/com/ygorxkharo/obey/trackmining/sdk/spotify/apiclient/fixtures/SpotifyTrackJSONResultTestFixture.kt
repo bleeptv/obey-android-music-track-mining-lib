@@ -6,7 +6,15 @@ import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.ExternalIds
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.AlbumImage
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.LibraryTrackEntity
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.TrackItem
-import com.ygorxkharo.trackmining.tracks.model.*
+import com.ygorxkharo.trackmining.tracks.model.AlbumSource
+import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
+import com.ygorxkharo.trackmining.tracks.model.LicensingRestrictions
+import com.ygorxkharo.trackmining.tracks.model.PlaybackAttribution
+import com.ygorxkharo.trackmining.tracks.model.ProductionAttribution
+import com.ygorxkharo.trackmining.tracks.model.PublishingAttribution
+import com.ygorxkharo.trackmining.tracks.model.SKUs
+import com.ygorxkharo.trackmining.tracks.model.SourcingPlatform
+import com.ygorxkharo.trackmining.tracks.model.TrackContent
 import java.time.LocalDateTime
 
 /**
