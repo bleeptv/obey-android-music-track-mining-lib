@@ -1,4 +1,4 @@
-package com.ygorxkharo.obey.common
+package com.ygorxkharo.trackmining
 
 /**
  * Represent a result from an operation, normally when performed on the data layer of the app

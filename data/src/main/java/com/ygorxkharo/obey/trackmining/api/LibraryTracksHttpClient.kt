@@ -1,7 +1,7 @@
 package com.ygorxkharo.obey.trackmining.api
 
 import kotlinx.coroutines.Job
-import com.ygorxkharo.obey.common.Result
+import com.ygorxkharo.trackmining.Result
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 /**
@@ -26,17 +26,8 @@ interface LibraryTracksHttpClient {
      */
     fun getLibraryTracks(
         authToken: String,
-        resultLimit: Int,
-        onComplete: (Result<List<LibraryTrack>>) -> Unit
-    )
+        resultLimit: Int
+    ): Result<List<LibraryTrack>>
 
-    /**
-     * Cancel all network calls made to the HTTP resource
-     */
-    fun cancelAllRequests() {
-        networkCallsCollection
-            .filter { job -> job.isActive}
-            .forEach { job -> job.cancel()}
-        networkCallsCollection.clear()
-    }
+
 }

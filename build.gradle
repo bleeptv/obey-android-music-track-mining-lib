@@ -25,6 +25,7 @@ buildscript {
 
 plugins {
     id "org.sonarqube" version "3.1.1"
+    id "maven-publish"
 }
 
 apply from: './dependencies.gradle'
@@ -42,6 +43,8 @@ sonarqube {
 }
 
 allprojects {
+    group="com.ygorxkharo.obey"
+    version="1.0.0-SNAPSHOT"
     repositories {
         jcenter()
         google()
@@ -59,6 +62,7 @@ subprojects {
 
     afterEvaluate { project ->
         project.apply from: '../jacoco.gradle'
+        project.apply from: '../library-publish.gradle'
     }
 }
 

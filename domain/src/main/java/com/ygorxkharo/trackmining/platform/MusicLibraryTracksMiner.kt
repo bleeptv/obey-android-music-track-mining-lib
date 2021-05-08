@@ -1,5 +1,6 @@
 package com.ygorxkharo.trackmining.platform
 
+import com.ygorxkharo.trackmining.Result
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 /**
@@ -13,8 +14,5 @@ interface MusicLibraryTracksMiner {
      * @param onSuccess Triggered once the mining process is completed
      * @param onError Triggered when the mining process fails
      */
-    fun mine(
-        onSuccess: (List<LibraryTrack>) -> Unit,
-        onError: (Throwable) -> Unit
-    )
+    fun mine(): Result<List<LibraryTrack>>
 }

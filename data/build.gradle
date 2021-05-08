@@ -42,8 +42,8 @@ dependencies {
     implementation libs.androidx_core_ktx
     implementation libs.moshi
     kapt libs.moshiCodeGen
-    implementation libs.coroutines_core
-    implementation libs.coroutines_android
+    api libs.coroutines_core
+    api libs.coroutines_android
     api libs.retrofit
     api libs.moshi_converter
     implementation libs.okHTTP

@@ -1,0 +1,57 @@
+apply plugin: "maven-publish"
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+afterEvaluate {
+
+    if(plugins.hasPlugin("android-library")) {
+        generateReleaseBuildConfig.enabled = false
+        generateDebugBuildConfig.enabled = false
+    }
+    
+    if (!plugins.hasPlugin("android")) {
+        publishing {
+            publications {
+                "$project.name"(MavenPublication) {
+                    artifactId = "$rootProject.name-$project.name"
+                    if (plugins.hasPlugin("java")) {
+                        from components.java
+                    } else if (plugins.hasPlugin("android-library")) {
+                        from components.debug
+                    }
+
+                    pom {
+                        name = 'Obey Track Mining Library'
+                        description = 'Mine music tracks from various music platforms'
+                        url = 'https://repo.repsy.io/mvn/supermud008/my-private-libs'
+                        licenses {
+                            license {
+                                name = 'The Apache License, Version 2.0'
+                                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+                        developers {
+                            developer {
+                                id = 'ygorxkharo'
+                                name = 'Ygor x Kharo'
+                                email = 'ygorxkharo@bleeptv.cco'
+                            }
+                        }
+                    }
+                }
+            }
+
+            repositories {
+                maven {
+                    name 'TrackMiningSNAPSHOT'
+                    url 'https://repo.repsy.io/mvn/supermud008/obey-snapshot-libs'
+                    credentials {
+                        username properties.getProperty("repsyUsername", "")
+                        password properties.getProperty("repsyPassword", "")
+                    }
+                }
+            }
+        }
+    }
+}

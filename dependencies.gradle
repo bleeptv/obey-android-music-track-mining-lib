@@ -22,7 +22,8 @@ ext.versions = [
         moshi                 : '1.11.0',
         retrofit              : '2.9.0',
         okHTTP                : '4.3.1',
-        core_desugar_lib      : '1.0.5'
+        core_desugar_lib      : '1.0.5',
+        kodein                : '7.1.0'
 ]
 
 ext.libs = [

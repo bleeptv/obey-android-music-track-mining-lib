@@ -17,11 +17,11 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import com.ygorxkharo.obey.common.Failure
-import com.ygorxkharo.obey.common.Success
 import com.ygorxkharo.obey.networking.errors.AuthenticationError
 import com.ygorxkharo.obey.networking.errors.NetworkError
 import com.ygorxkharo.obey.networking.errors.ServerError
+import com.ygorxkharo.trackmining.Failure
+import com.ygorxkharo.trackmining.Success
 
 internal class NetworkCallExtensionsKtTest {
 
@@ -58,8 +58,8 @@ internal class NetworkCallExtensionsKtTest {
             val actualResult = mockNetworkCall.getResult(processResponse)
 
             //Assert
-            assertTrue(actualResult is Success<String>)
-            val result = actualResult as Success<String>
+            assertTrue(actualResult is Success)
+            val result = actualResult as Success
             assertEquals(expectedEndResultValue, result.payload)
         }
     }
