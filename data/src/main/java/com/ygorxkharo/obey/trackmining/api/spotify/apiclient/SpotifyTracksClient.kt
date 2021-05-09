@@ -1,13 +1,13 @@
 package com.ygorxkharo.obey.trackmining.api.spotify.apiclient
 
 import kotlinx.coroutines.Job
-import com.ygorxkharo.obey.common.Result
 import com.ygorxkharo.obey.networking.client.retrofit.getResult
 import com.ygorxkharo.obey.utilities.threading.CoroutineContextProvider
 import com.ygorxkharo.obey.utilities.threading.ThreadingExecutor
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.mapper.LibraryTrackMapper
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
+import com.ygorxkharo.trackmining.Result
 
 /**
  * Spotify's HTTP implementation for fetching library tracks

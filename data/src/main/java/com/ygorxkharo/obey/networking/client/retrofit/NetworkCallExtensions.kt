@@ -4,13 +4,13 @@ import retrofit2.Call
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
-import com.ygorxkharo.obey.common.Failure
-import com.ygorxkharo.obey.common.Result
-import com.ygorxkharo.obey.common.Success
 import com.ygorxkharo.obey.networking.HttpCodes
 import com.ygorxkharo.obey.networking.errors.AuthenticationError
 import com.ygorxkharo.obey.networking.errors.NetworkError
 import com.ygorxkharo.obey.networking.errors.ServerError
+import com.ygorxkharo.trackmining.Failure
+import com.ygorxkharo.trackmining.Result
+import com.ygorxkharo.trackmining.Success
 
 /**
  * Extension function to handle different types of states when performing HTTP calls.

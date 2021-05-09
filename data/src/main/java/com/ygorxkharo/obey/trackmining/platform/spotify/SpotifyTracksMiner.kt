@@ -1,8 +1,8 @@
 package com.ygorxkharo.obey.trackmining.platform.spotify
 
-import com.ygorxkharo.obey.common.Failure
-import com.ygorxkharo.obey.common.Success
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
+import com.ygorxkharo.trackmining.Failure
+import com.ygorxkharo.trackmining.Success
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
