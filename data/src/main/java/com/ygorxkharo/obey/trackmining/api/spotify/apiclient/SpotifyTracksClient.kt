@@ -7,7 +7,7 @@ import com.ygorxkharo.obey.utilities.threading.ThreadingExecutor
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.mapper.LibraryTrackMapper
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
-import com.ygorxkharo.trackmining.Result
+import com.ygorxkharo.trackmining.common.api.client.model.Result
 
 /**
  * Spotify's HTTP implementation for fetching library tracks

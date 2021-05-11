@@ -1,6 +1,6 @@
 package com.ygorxkharo.obey.trackmining.api
 
-import com.ygorxkharo.trackmining.Result
+import com.ygorxkharo.trackmining.common.api.client.model.Result
 import kotlinx.coroutines.Job
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 

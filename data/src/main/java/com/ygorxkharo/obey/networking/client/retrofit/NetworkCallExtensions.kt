@@ -8,9 +8,9 @@ import com.ygorxkharo.obey.networking.HttpCodes
 import com.ygorxkharo.obey.networking.errors.AuthenticationError
 import com.ygorxkharo.obey.networking.errors.NetworkError
 import com.ygorxkharo.obey.networking.errors.ServerError
-import com.ygorxkharo.trackmining.Failure
-import com.ygorxkharo.trackmining.Result
-import com.ygorxkharo.trackmining.Success
+import com.ygorxkharo.trackmining.common.api.client.model.Failure
+import com.ygorxkharo.trackmining.common.api.client.model.Result
+import com.ygorxkharo.trackmining.common.api.client.model.Success
 
 /**
  * Extension function to handle different types of states when performing HTTP calls.

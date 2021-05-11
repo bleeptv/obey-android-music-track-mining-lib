@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test
 import com.ygorxkharo.obey.networking.errors.ServerError
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
 import com.ygorxkharo.obey.trackmining.sdk.spotify.apiclient.fixtures.SpotifyTrackJSONResultTestFixture
-import com.ygorxkharo.trackmining.Failure
-import com.ygorxkharo.trackmining.Success
-import com.ygorxkharo.trackmining.Result
+import com.ygorxkharo.trackmining.common.api.client.model.Failure
+import com.ygorxkharo.trackmining.common.api.client.model.Success
+import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
 
