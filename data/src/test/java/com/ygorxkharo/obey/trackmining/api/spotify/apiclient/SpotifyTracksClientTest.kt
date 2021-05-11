@@ -26,9 +26,9 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import com.ygorxkharo.obey.filesystem.TestFileUtils
 import com.ygorxkharo.obey.utilities.threading.DefaultCoroutineContextProvider
 import com.ygorxkharo.obey.trackmining.sdk.spotify.apiclient.fixtures.SpotifyTrackJSONResultTestFixture
-import com.ygorxkharo.obey.common.Failure
-import com.ygorxkharo.obey.common.Result
-import com.ygorxkharo.obey.common.Success
+import com.ygorxkharo.trackmining.common.api.client.model.Failure
+import com.ygorxkharo.trackmining.common.api.client.model.Result
+import com.ygorxkharo.trackmining.common.api.client.model.Success
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.mapper.LibraryTrackMapper
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.GetTracksFromSpotifyResponse
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
