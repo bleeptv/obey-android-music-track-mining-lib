@@ -12,22 +12,46 @@ private static boolean isAndroidModule(Project project) {
     return project.plugins.hasPlugin('com.android.library')
 }
 
-def setupAndroidReporting() {
-    tasks.withType(Test) {
-        // Whether or not classes without source location should be instrumented
-        jacoco.includeNoLocationClasses true
-        testLogging {
-            showExceptions = true
-            showStandardStreams = true
-            events(
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.FAILED
-            )
-        }
+tasks.withType(Test) {
+    // Whether or not classes without source location should be instrumented
+    jacoco.includeNoLocationClasses true
+    testLogging {
+        showExceptions = true
+        showStandardStreams = true
+        events(
+                TestLogEvent.PASSED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.FAILED
+        )
     }
+}
 
-    task jacocoTestsReport(
+def setupKotlinReporting() {
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            csv.enabled false // change if needed
+            xml {
+                enabled true
+                destination file("${buildDir}/reports/jacoco/jacoco.xml")
+            }
+            html {
+                enabled true
+                destination file("${buildDir}/reports/jacoco/html")
+            }
+        }
+        def fileFilter = ["**/model/**"]
+        def debugTree = fileTree(
+                dir: "$buildDir/classes/kotlin/main/",
+                excludes: fileFilter
+        )
+        classDirectories.from = files([debugTree])
+    }
+}
+
+def setupAndroidReporting() {
+
+    task jacocoAndroidTestingReport(
             type: JacocoReport,
             dependsOn: ['testDebugUnitTest']
     ) {
@@ -35,7 +59,7 @@ def setupAndroidReporting() {
             csv.enabled false
             xml {
                 enabled true
-                xml.destination = file("${buildDir}/reports/jacoco/jacoco.xml")
+                destination file("${buildDir}/reports/jacoco/jacoco.xml")
             }
             html {
                 enabled true
@@ -97,5 +121,7 @@ afterEvaluate { project ->
     if (isAndroidModule(project)) {
         setupAndroidReporting()
         setupAndroidCoverageVerification(threshold)
+    } else {
+        setupKotlinReporting()
     }
 }

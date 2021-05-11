@@ -38,7 +38,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew clean jacocoTestsReport --stacktrace
+        run: ./gradlew clean jacocoAndroidTestingReport jacocoTestReport --stacktrace
       - name: Unit Tests Results
         uses: actions/upload-artifact@v2
         with:
