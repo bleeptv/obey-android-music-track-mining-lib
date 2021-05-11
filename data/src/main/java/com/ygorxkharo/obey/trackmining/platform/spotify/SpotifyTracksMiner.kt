@@ -1,8 +1,7 @@
 package com.ygorxkharo.obey.trackmining.platform.spotify
 
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
-import com.ygorxkharo.trackmining.common.api.client.model.Failure
-import com.ygorxkharo.trackmining.common.api.client.model.Success
+import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
@@ -17,16 +16,8 @@ class SpotifyTracksMiner(
     private val queryResultsLimit: Int
 ): MusicLibraryTracksMiner {
 
-    override fun mine(
-        onSuccess: (List<LibraryTrack>) -> Unit,
-        onError: (Throwable) -> Unit
-    ) {
+    override fun mine(): Result<List<LibraryTrack>> {
         val authToken = "" // TODO: Handle authentication token provision in Jira ticket #B2MVE-1140
-        libraryTracksApiClient.getLibraryTracks(authToken, queryResultsLimit) { result ->
-            when(result) {
-                is Success -> onSuccess(result.payload)
-                is Failure -> onError(result.error)
-            }
-        }
+        return libraryTracksApiClient.getLibraryTracks(authToken, queryResultsLimit)
     }
 }

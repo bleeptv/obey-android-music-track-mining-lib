@@ -1,5 +1,6 @@
 package com.ygorxkharo.trackmining
 
+import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
@@ -18,12 +19,6 @@ interface LibraryTracksProvider<T> {
     /**
      *
      * @param trackMiningRequest Defines the music platform to mine tracks from, of generic type [T]
-     * @param onSuccess Callback triggered when the mining process is successful
-     * @param onError Callback triggered when the mining process fails due to an error
      */
-    fun provideFromPlatform(
-        trackMiningRequest: LibraryTrackMiningRequest,
-        onSuccess: (List<LibraryTrack>) -> Unit,
-        onError: (Throwable) -> Unit
-    )
+    fun provideFromPlatform(trackMiningRequest: LibraryTrackMiningRequest): Result<List<LibraryTrack>>
 }

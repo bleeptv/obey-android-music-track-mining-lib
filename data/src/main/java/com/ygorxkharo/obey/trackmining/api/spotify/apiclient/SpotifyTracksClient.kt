@@ -1,9 +1,7 @@
 package com.ygorxkharo.obey.trackmining.api.spotify.apiclient
 
-import kotlinx.coroutines.Job
 import com.ygorxkharo.obey.networking.client.retrofit.getResult
 import com.ygorxkharo.obey.utilities.threading.CoroutineContextProvider
-import com.ygorxkharo.obey.utilities.threading.ThreadingExecutor
 import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.mapper.LibraryTrackMapper
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
@@ -23,19 +21,11 @@ class SpotifyTracksClient(
     private val libraryTrackMapper: LibraryTrackMapper
 ): LibraryTracksHttpClient {
 
-    override val networkCallsCollection: MutableList<Job> = ArrayList()
-
     override fun getLibraryTracks(
         authToken: String,
-        resultLimit: Int,
-        onComplete: (Result<List<LibraryTrack>>) -> Unit
-    )  {
-        val currentRequest = ThreadingExecutor.executeAsyncOperation(
-            performInBackground = { fetchLikedSongs(authToken, resultLimit) },
-            performInMainProcess = { libraryTracksResult -> onComplete(libraryTracksResult) },
-            contextProvider = coroutineContextProvider
-        )
-        networkCallsCollection.add(currentRequest)
+        queryResultLimit: Int
+    ): Result<List<LibraryTrack>>  {
+        return fetchLikedSongs(authToken, queryResultLimit)
     }
 
     /**

@@ -3,8 +3,6 @@ package com.ygorxkharo.obey.trackmining.platform.spotify
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.stub
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import com.ygorxkharo.obey.networking.errors.ServerError
@@ -12,8 +10,7 @@ import com.ygorxkharo.obey.trackmining.api.LibraryTracksHttpClient
 import com.ygorxkharo.obey.trackmining.sdk.spotify.apiclient.fixtures.SpotifyTrackJSONResultTestFixture
 import com.ygorxkharo.trackmining.common.api.client.model.Failure
 import com.ygorxkharo.trackmining.common.api.client.model.Success
-import com.ygorxkharo.trackmining.common.api.client.model.Result
-import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
+import org.junit.jupiter.api.Assertions.assertEquals
 
 
 internal class SpotifyTracksMinerTest {
@@ -21,8 +18,6 @@ internal class SpotifyTracksMinerTest {
     private lateinit var sut: SpotifyTracksMiner
     private val mockLibraryTracksApiClient: LibraryTracksHttpClient = mock()
     private val queryResultsLimit = 1
-    private val mockOnSuccessCallback: (List<LibraryTrack>) -> Unit = mock()
-    private val mockOnErrorCallback: (Throwable) -> Unit = mock()
     private val libraryTrack = SpotifyTrackJSONResultTestFixture.buildLibraryTrack()
     private val expectedFetchedLibraryTracks = listOf(libraryTrack)
 
@@ -36,19 +31,15 @@ internal class SpotifyTracksMinerTest {
     fun `test when tracks are mined successfully, expect onSuccess callback to be triggered with list of tracks`() {
         //Arrange
         mockLibraryTracksApiClient.stub {
-            on { getLibraryTracks(any(), any(), any()) }.thenAnswer { invocation ->
-                val onComplete = invocation.arguments[2] as (Result<List<LibraryTrack>>) -> Unit
-                val result = Success(expectedFetchedLibraryTracks)
-                onComplete(result)
-            }
+            val result = Success(expectedFetchedLibraryTracks)
+            on { getLibraryTracks(any(), any()) }.thenReturn(result)
         }
 
         //Act
-        sut.mine(mockOnSuccessCallback, mockOnErrorCallback)
+        val actualResult = sut.mine()
 
         //Assert
-        verify(mockOnSuccessCallback).invoke(expectedFetchedLibraryTracks)
-        verifyNoMoreInteractions(mockOnErrorCallback)
+        assertEquals(expectedFetchedLibraryTracks, (actualResult as Success).payload)
     }
 
     @Test
@@ -56,18 +47,14 @@ internal class SpotifyTracksMinerTest {
         //Arrange
         val errorThrowable = ServerError
         mockLibraryTracksApiClient.stub {
-            on { getLibraryTracks(any(), any(), any()) }.thenAnswer { invocation ->
-                val onComplete = invocation.arguments[2] as (Result<List<LibraryTrack>>) -> Unit
-                val result = Failure(errorThrowable)
-                onComplete(result)
-            }
+            val result = Failure(errorThrowable)
+            on { getLibraryTracks(any(), any()) }.thenReturn(result)
         }
 
         //Act
-        sut.mine(mockOnSuccessCallback, mockOnErrorCallback)
+        val actualResult = sut.mine()
 
         //Assert
-        verify(mockOnErrorCallback).invoke(errorThrowable)
-        verifyNoMoreInteractions(mockOnSuccessCallback)
+        assertEquals(errorThrowable, (actualResult as Failure).error)
     }
 }
