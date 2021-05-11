@@ -58,8 +58,8 @@ internal class NetworkCallExtensionsKtTest {
             val actualResult = mockNetworkCall.getResult(processResponse)
 
             //Assert
-            assertTrue(actualResult is Success<String>)
-            val result = actualResult as Success<String>
+            assertTrue(actualResult is Success)
+            val result = actualResult as Success
             assertEquals(expectedEndResultValue, result.payload)
         }
     }

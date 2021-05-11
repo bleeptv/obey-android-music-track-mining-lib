@@ -2,9 +2,7 @@ package com.ygorxkharo.obey.trackmining.api.spotify.apiclient
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.stub
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -27,7 +25,6 @@ import com.ygorxkharo.obey.filesystem.TestFileUtils
 import com.ygorxkharo.obey.utilities.threading.DefaultCoroutineContextProvider
 import com.ygorxkharo.obey.trackmining.sdk.spotify.apiclient.fixtures.SpotifyTrackJSONResultTestFixture
 import com.ygorxkharo.trackmining.common.api.client.model.Failure
-import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.common.api.client.model.Success
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.mapper.LibraryTrackMapper
 import com.ygorxkharo.obey.trackmining.api.spotify.apiclient.model.GetTracksFromSpotifyResponse
@@ -39,7 +36,6 @@ internal class SpotifyTracksClientTest {
     private val libraryTrackMapper = LibraryTrackMapper()
     private val mockHttpAPI: HTTPApi = mock()
     private val coroutineContextProvider = DefaultCoroutineContextProvider()
-    private val mockOnFetchLikedSongsCallback: (Result<List<LibraryTrack>>) -> Unit = mock()
     private val authToken = "Bearer ey.Tjlaowwwoijfaljf242sfsjaf"
     private val libraryTrackResultCount = 1
     private val httpErrorCode = 500
@@ -47,8 +43,6 @@ internal class SpotifyTracksClientTest {
     private val moshiInstance = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-
-    private val likedSongsResultCaptor = argumentCaptor<Result<List<LibraryTrack>>>()
 
     @ExperimentalCoroutinesApi
     @BeforeEach
@@ -99,23 +93,16 @@ internal class SpotifyTracksClientTest {
             val expectedTotalTracksCount = 1
 
             //Act
-            runBlocking {
+            val actualResult = runBlocking {
                 sut.getLibraryTracks(
                     authToken,
-                    libraryTrackResultCount,
-                    mockOnFetchLikedSongsCallback
+                    libraryTrackResultCount
                 )
-                sut.networkCallsCollection.first().join()
             }
 
             //Assert
-            verify(mockOnFetchLikedSongsCallback).invoke(likedSongsResultCaptor.capture())
-            val actualResult = likedSongsResultCaptor.firstValue
             assertTrue(actualResult is Success)
-            assertEquals(
-                expectedTotalTracksCount,
-                (actualResult as Success<List<LibraryTrack>>).payload.size
-            )
+            assertEquals(expectedTotalTracksCount, (actualResult as Success).payload.size)
         }
 
         @Test
@@ -132,41 +119,15 @@ internal class SpotifyTracksClientTest {
             }
 
             //Act
-            runBlocking {
+            val actualResult = runBlocking {
                 sut.getLibraryTracks(
                     authToken,
-                    libraryTrackResultCount,
-                    mockOnFetchLikedSongsCallback
+                    libraryTrackResultCount
                 )
-                sut.networkCallsCollection.first().join()
             }
 
             //Assert
-            verify(mockOnFetchLikedSongsCallback).invoke(likedSongsResultCaptor.capture())
-            val actualResult = likedSongsResultCaptor.firstValue
             assertTrue(actualResult is Failure)
-        }
-    }
-
-    @Nested
-    @DisplayName("When cancelling all requests")
-    inner class CancelledRequestsTests {
-
-        @Test
-        fun `test when all requests are cancelled, expect network calls collection to be empty`() {
-            //Arrange: Simulate failing request
-            val errorResponseString = "".toResponseBody()
-            mockFetchLikedSongsCall.stub {
-                on { execute() }.thenReturn(Response.error(httpErrorCode, errorResponseString))
-            }
-
-            sut.getLibraryTracks(authToken, libraryTrackResultCount, mockOnFetchLikedSongsCallback)
-
-            //Act
-            sut.cancelAllRequests()
-
-            //Assert
-            assertTrue(sut.networkCallsCollection.isEmpty())
         }
     }
 }
