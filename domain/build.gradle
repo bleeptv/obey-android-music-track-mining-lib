@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'jacoco'
 }
 
 java {
@@ -10,4 +11,7 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation test_libs.mockito_kotlin
+    testImplementation test_libs.junit_ext_ktx
+    testImplementation test_libs.junit_ext
 }
