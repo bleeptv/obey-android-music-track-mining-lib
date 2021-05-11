@@ -35,7 +35,7 @@ internal class GetLibraryTracksUseCaseTest {
     }
 
     @Test
-    fun `test result is successful, expect the result to contain a collection of library tracks`() {
+    fun `test when result is successful, expect the result to contain a collection of library tracks`() {
         //Arrange
         val libraryTrack = buildLibraryTrack()
         val expectedLibraryTracks = listOf(libraryTrack)
@@ -50,7 +50,7 @@ internal class GetLibraryTracksUseCaseTest {
     }
 
     @Test
-    fun `test result is failure, expect the result to contain a throwable`() {
+    fun `test when result is a failure, expect the result to contain a throwable`() {
         //Arrange
         val expectedThrowable = Throwable("Error with network")
         whenever(mockLibraryTracksProvider.provideFromPlatform(any())).thenReturn(Failure(expectedThrowable))
