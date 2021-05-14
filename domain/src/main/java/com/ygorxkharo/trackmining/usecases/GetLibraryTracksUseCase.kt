@@ -1,7 +1,7 @@
 package com.ygorxkharo.trackmining.usecases
 
 import com.ygorxkharo.trackmining.LibraryTrackMiningRequest
-import com.ygorxkharo.trackmining.LibraryTracksProvider
+import com.ygorxkharo.trackmining.LibraryTracksRepository
 import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
@@ -9,10 +9,10 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
  * Illustrates how library tracks are fetched in the library, showing which components are called
  * to mine tracks
  *
- * @property libraryTracksProvider Used to fetch library tracks resources from various available source
+ * @property libraryTracksRepository Used to fetch library tracks resources from various available source
  */
 class GetLibraryTracksUseCase(
-    private val libraryTracksProvider: LibraryTracksProvider<String>
+    private val libraryTracksRepository: LibraryTracksRepository<String>
 ) {
 
     /**
@@ -23,6 +23,6 @@ class GetLibraryTracksUseCase(
      * if an error occurs while getting library tracks
      */
     operator fun invoke(miningTrackRequest: LibraryTrackMiningRequest): Result<List<LibraryTrack>> {
-        return libraryTracksProvider.provideFromPlatform(miningTrackRequest)
+        return libraryTracksRepository.getLibraryTracks(miningTrackRequest)
     }
 }

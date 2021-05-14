@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import java.time.LocalDateTime
 import com.ygorxkharo.trackmining.LibraryTrackMiningRequest
-import com.ygorxkharo.trackmining.LibraryTracksProvider
+import com.ygorxkharo.trackmining.LibraryTracksRepository
 import com.ygorxkharo.trackmining.common.api.client.model.Failure
 import com.ygorxkharo.trackmining.common.api.client.model.Success
 import com.ygorxkharo.trackmining.tracks.model.AlbumSource
@@ -24,14 +24,14 @@ import com.ygorxkharo.trackmining.tracks.model.TrackContent
 
 internal class GetLibraryTracksUseCaseTest {
 
-    private val mockLibraryTracksProvider: LibraryTracksProvider<String> = mock()
+    private val mockLibraryTracksRepository: LibraryTracksRepository<String> = mock()
     private lateinit var sut: GetLibraryTracksUseCase
     private val chosenPlatformName = "spotify"
     private val libraryTrackMiningRequest = LibraryTrackMiningRequest(chosenPlatformName)
 
     @Before
     fun setup() {
-        sut = GetLibraryTracksUseCase(mockLibraryTracksProvider)
+        sut = GetLibraryTracksUseCase(mockLibraryTracksRepository)
     }
 
     @Test
@@ -39,7 +39,7 @@ internal class GetLibraryTracksUseCaseTest {
         //Arrange
         val libraryTrack = buildLibraryTrack()
         val expectedLibraryTracks = listOf(libraryTrack)
-        whenever(mockLibraryTracksProvider.provideFromPlatform(any())).thenReturn(Success(expectedLibraryTracks))
+        whenever(mockLibraryTracksRepository.getLibraryTracks(any())).thenReturn(Success(expectedLibraryTracks))
 
         //Act
         val actualResult = sut(libraryTrackMiningRequest)
@@ -53,7 +53,7 @@ internal class GetLibraryTracksUseCaseTest {
     fun `test when result is a failure, expect the result to contain a throwable`() {
         //Arrange
         val expectedThrowable = Throwable("Error with network")
-        whenever(mockLibraryTracksProvider.provideFromPlatform(any())).thenReturn(Failure(expectedThrowable))
+        whenever(mockLibraryTracksRepository.getLibraryTracks(any())).thenReturn(Failure(expectedThrowable))
 
         //Act
         val actualResult = sut(libraryTrackMiningRequest)

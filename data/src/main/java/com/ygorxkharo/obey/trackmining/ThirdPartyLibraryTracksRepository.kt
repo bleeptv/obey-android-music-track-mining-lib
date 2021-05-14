@@ -4,7 +4,7 @@ import com.ygorxkharo.trackmining.exceptions.LibraryTracksMiningException
 import com.ygorxkharo.obey.trackmining.platform.MusicTracksSource
 import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.LibraryTrackMiningRequest
-import com.ygorxkharo.trackmining.LibraryTracksProvider
+import com.ygorxkharo.trackmining.LibraryTracksRepository
 import com.ygorxkharo.trackmining.common.api.client.model.Result
 import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
 
@@ -13,11 +13,11 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
  * uses a [MusicTracksSource] to describe which platform to use for the track mining process
  *
  */
-class DefaultLibraryTracksProvider(
+class ThirdPartyLibraryTracksRepository(
     override val platformCollection: Map<String, MusicLibraryTracksMiner>
-): LibraryTracksProvider<String> {
+): LibraryTracksRepository<String> {
 
-    override fun provideFromPlatform(
+    override fun getLibraryTracks(
         trackMiningRequest: LibraryTrackMiningRequest
     ): Result<List<LibraryTrack>> {
         val currentPlatform = platformCollection[trackMiningRequest.chosenPlatformName] ?:
