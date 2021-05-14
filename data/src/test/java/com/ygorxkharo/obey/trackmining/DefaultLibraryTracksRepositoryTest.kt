@@ -13,16 +13,16 @@ import com.ygorxkharo.trackmining.platform.MusicLibraryTracksMiner
 import com.ygorxkharo.trackmining.exceptions.LibraryTracksMiningException
 import com.ygorxkharo.trackmining.LibraryTrackMiningRequest
 
-internal class DefaultLibraryTracksProviderTest {
+internal class DefaultLibraryTracksRepositoryTest {
 
     private val mockLibraryTracksMiner: MusicLibraryTracksMiner = mock()
     private val mockLibraryTracksMinerCollection: Map<String, MusicLibraryTracksMiner> = mock()
-    private lateinit var sut: DefaultLibraryTracksProvider
+    private lateinit var sut: DefaultLibraryTracksRepository
     private lateinit var chosenPlatformName: String
 
     @BeforeEach
     fun setup() {
-        sut = DefaultLibraryTracksProvider(mockLibraryTracksMinerCollection)
+        sut = DefaultLibraryTracksRepository(mockLibraryTracksMinerCollection)
     }
 
     @Test
@@ -33,7 +33,7 @@ internal class DefaultLibraryTracksProviderTest {
         whenever(mockLibraryTracksMinerCollection[any()]).thenReturn(mockLibraryTracksMiner)
 
         //Act
-        sut.provideFromPlatform(validLibraryTrackMinerRequest)
+        sut.getFromPlatform(validLibraryTrackMinerRequest)
 
         //Assert
         verify(mockLibraryTracksMiner).mine()
@@ -49,7 +49,7 @@ internal class DefaultLibraryTracksProviderTest {
 
         //Act
         val expectedException = assertThrows<LibraryTracksMiningException> {
-            sut.provideFromPlatform(invalidLibraryTrackMinerRequest)
+            sut.getFromPlatform(invalidLibraryTrackMinerRequest)
         }
 
         //Assert
