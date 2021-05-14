@@ -20,5 +20,5 @@ interface LibraryTracksRepository<T> {
      *
      * @param trackMiningRequest Defines the music platform to mine tracks from, of generic type [T]
      */
-    fun getFromPlatform(trackMiningRequest: LibraryTrackMiningRequest): Result<List<LibraryTrack>>
+    fun getLibraryTracks(trackMiningRequest: LibraryTrackMiningRequest): Result<List<LibraryTrack>>
 }

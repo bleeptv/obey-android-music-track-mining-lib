@@ -17,12 +17,12 @@ internal class DefaultLibraryTracksRepositoryTest {
 
     private val mockLibraryTracksMiner: MusicLibraryTracksMiner = mock()
     private val mockLibraryTracksMinerCollection: Map<String, MusicLibraryTracksMiner> = mock()
-    private lateinit var sut: DefaultLibraryTracksRepository
+    private lateinit var sut: ThirdPartyLibraryTracksRepository
     private lateinit var chosenPlatformName: String
 
     @BeforeEach
     fun setup() {
-        sut = DefaultLibraryTracksRepository(mockLibraryTracksMinerCollection)
+        sut = ThirdPartyLibraryTracksRepository(mockLibraryTracksMinerCollection)
     }
 
     @Test
@@ -33,7 +33,7 @@ internal class DefaultLibraryTracksRepositoryTest {
         whenever(mockLibraryTracksMinerCollection[any()]).thenReturn(mockLibraryTracksMiner)
 
         //Act
-        sut.getFromPlatform(validLibraryTrackMinerRequest)
+        sut.getLibraryTracks(validLibraryTrackMinerRequest)
 
         //Assert
         verify(mockLibraryTracksMiner).mine()
@@ -49,7 +49,7 @@ internal class DefaultLibraryTracksRepositoryTest {
 
         //Act
         val expectedException = assertThrows<LibraryTracksMiningException> {
-            sut.getFromPlatform(invalidLibraryTrackMinerRequest)
+            sut.getLibraryTracks(invalidLibraryTrackMinerRequest)
         }
 
         //Assert

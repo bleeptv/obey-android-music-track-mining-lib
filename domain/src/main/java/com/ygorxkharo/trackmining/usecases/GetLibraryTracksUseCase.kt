@@ -23,6 +23,6 @@ class GetLibraryTracksUseCase(
      * if an error occurs while getting library tracks
      */
     operator fun invoke(miningTrackRequest: LibraryTrackMiningRequest): Result<List<LibraryTrack>> {
-        return libraryTracksRepository.getFromPlatform(miningTrackRequest)
+        return libraryTracksRepository.getLibraryTracks(miningTrackRequest)
     }
 }

@@ -13,11 +13,11 @@ import com.ygorxkharo.trackmining.tracks.model.LibraryTrack
  * uses a [MusicTracksSource] to describe which platform to use for the track mining process
  *
  */
-class DefaultLibraryTracksRepository(
+class ThirdPartyLibraryTracksRepository(
     override val platformCollection: Map<String, MusicLibraryTracksMiner>
 ): LibraryTracksRepository<String> {
 
-    override fun getFromPlatform(
+    override fun getLibraryTracks(
         trackMiningRequest: LibraryTrackMiningRequest
     ): Result<List<LibraryTrack>> {
         val currentPlatform = platformCollection[trackMiningRequest.chosenPlatformName] ?:
